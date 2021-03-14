@@ -1,29 +1,55 @@
 <template>
   <div class="header">
     <ul class="container">
-      <li class="shouye">首页</li>
-      <li>Java</li>
-      <li>C++</li>
-      <li>Python</li>
-      <li>JavaScript</li>
+      <li><router-link to="/shouYe">首页</router-link></li>
+      <li><router-link to="/java">Java</router-link></li>
+      <li><router-link to="/c">C++</router-link></li>
+      <li><router-link to="/python">Python</router-link></li>
+      <li><router-link to="/javascript">JavaScrpt</router-link></li>
     </ul>
-    <div class="profile">
-      <p>登录</p>
+    <div class="profile" v-if="notLogin">
+      <p><router-link to="/denglu">登录</router-link></p>
       <p>|</p>
-      <p>注册</p>
+      <p><router-link to="zhuce">注册</router-link></p>
     </div>
+    <el-menu class="logIn" mode="horizontal" v-else>
+      <el-submenu index="2">
+        <template slot="title"
+          ><img src="../../assets/image/time.jpg"
+        /></template>
+        <el-menu-item index="2-1" class="menu-item" @click="toUser"
+          >我的主页</el-menu-item
+        >
+        <el-menu-item index="2-2" class="menu-item">我的帖子</el-menu-item>
+        <el-menu-item index="2-3" class="menu-item">我的收藏</el-menu-item>
+        <el-menu-item index="2-3" class="menu-item">退出论坛</el-menu-item>
+      </el-submenu>
+    </el-menu>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "tabbar",
+  data() {
+    return {
+      notLogin: true,
+    };
+  },
+  mounted() {},
+  methods: {
+    toUser() {
+      this.$router.push("/user");
+    },
+  },
+};
 </script>
 
 <style scoped>
 .header {
   width: 100%;
   height: 60px;
-  background-color: rgb(26, 25, 25);
+  background-color: rgb(22, 21, 21);
   color: rgb(193, 204, 214);
   display: flex;
   justify-content: space-around;
@@ -33,11 +59,25 @@ export default {};
   flex-basis: 40%;
   display: flex;
   justify-content: space-around;
-  text-align: center;
+  align-items: center;
 }
 .profile {
-  flex-basis: 5%;
+  flex-basis: 10%;
   display: flex;
   justify-content: space-around;
+}
+.router-link-active {
+  font-size: 25px;
+  color: rgb(20, 157, 220);
+}
+.logIn {
+  text-align: center;
+  z-index: 10;
+  background-color: black;
+}
+.logIn img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 </style>

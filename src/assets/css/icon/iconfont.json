@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "135033",
+      "name": "赞",
+      "font_class": "zan",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "5913216",
+      "name": "赞",
+      "font_class": "zan1",
+      "unicode": "e50a",
+      "unicode_decimal": 58634
+    },
+    {
+      "icon_id": "9755158",
+      "name": "赞",
+      "font_class": "zan2",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "11934948",
+      "name": "赞",
+      "font_class": "zan-copy",
+      "unicode": "e505",
+      "unicode_decimal": 58629
+    }
+  ]
+}
