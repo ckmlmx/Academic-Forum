@@ -2,15 +2,15 @@
   <div class="top">
     <div class="top-container">
       <p class="zhiding">置顶：</p>
-      <p>11111111111</p>
+      <p>查看论坛守则</p>
     </div>
     <div class="top-container">
       <p class="zhiding">置顶：</p>
-      <p>11111111111</p>
+      <p>精品帖子</p>
     </div>
     <div class="top-container">
       <p class="zhiding">置顶：</p>
-      <p>11111111111</p>
+      <p>最新消息</p>
     </div>
   </div>
 </template>
@@ -26,11 +26,11 @@ export default {
     };
   },
   created() {
-    this.axios.get("/0").then((res) => {
-      this.title1 = res.data.title1;
-      this.title2 = res.data.title2;
-      this.title3 = res.data.title3;
-    });
+    // this.axios.get("/0").then((res) => {
+    //   this.title1 = res.data.title1;
+    //   this.title2 = res.data.title2;
+    //   this.title3 = res.data.title3;
+    // });
   },
 };
 </script>

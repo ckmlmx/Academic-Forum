@@ -39,7 +39,7 @@ export default {
 .container {
   margin-top: 30px;
   width: 70%;
-  min-height: 88%;
+  min-height: 150%;
   background-color: white;
   position: absolute;
   left: 50%;
@@ -61,6 +61,6 @@ export default {
   width: 70%;
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 30%;
 }
 </style>

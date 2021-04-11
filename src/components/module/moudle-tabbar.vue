@@ -8,6 +8,7 @@
         :title="item.title"
         :content="item.content"
         :date="item.date"
+        :author="item.author"
       ></outerTie>
       <el-pagination
         background
@@ -19,12 +20,15 @@
       <write></write>
     </el-tab-pane>
     <el-tab-pane label="最新帖子">
-      <outerTie></outerTie>
-      <outerTie></outerTie>
-      <outerTie></outerTie>
-      <outerTie></outerTie>
-      <outerTie></outerTie>
-
+      <outerTie
+        v-for="item in thread2"
+        :key="item.id"
+        :id="item.id"
+        :title="item.title"
+        :content="item.content"
+        :date="item.date"
+        :author="item.author"
+      ></outerTie>
       <el-pagination
         background
         layout="prev, pager, next"
@@ -46,17 +50,18 @@ export default {
     outerTie,
     write,
   },
+  props: {
+    thread1: Object,
+    thread2: Object,
+  },
   data() {
-    return {
-      thread1: [],
-      thread2: [],
-    };
+    return {};
   },
   created() {
-    this.axios.get("/thread/forum-thread-page").then((res) => {
-      this.thread1 = res.data.thread1;
-      this.thread2 = res.data.thread2;
-    });
+    // this.axios.get("/thread/forum-thread-page").then((res) => {
+    //   this.thread1 = res.data.thread1;
+    //   this.thread2 = res.data.thread2;
+    // });
   },
 };
 </script>

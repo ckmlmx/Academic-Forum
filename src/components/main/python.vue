@@ -6,7 +6,7 @@
       <div class="java-top">
         <isImage :url="url" wid="200px" high="200px" class="isImage"></isImage>
         <div>
-          <p>这是java的世界</p>
+          <p class="java-a">这是Python的世界</p>
           <a href="#write-container"><i class="el-icon-edit">我要发帖</i></a>
         </div>
       </div>
@@ -63,6 +63,7 @@ export default {
 }
 .java-top p {
   font-size: 1.5em;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 .el-icon-edit {
   margin-top: 30px;
