@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import store from "../../store";
 export default {
   name: "denglu",
   data() {
@@ -70,21 +71,8 @@ export default {
     },
     handleLogin() {
       if (this.user.userName && this.user.passWord) {
-        this.axios
-          .get("/0", this.user)
-          .then((res) => {
-            if (res.data.status == 200) {
-              window.sessionStorage.setItem("token", res.data.token);
-              this.$message({
-                type: "success",
-                message: "登录成功",
-              });
-              this.$router.push("/shouYe");
-            }
-          })
-          .catch((err) => {
-            this.$message.error("登录失败，账号或密码错误");
-          });
+        store.commit("toLogin");
+        this.$router.push("/shouYe");
       } else {
         alert("请输入账号密码");
       }

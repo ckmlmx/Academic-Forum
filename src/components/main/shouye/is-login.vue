@@ -4,7 +4,7 @@
       <img src="../../../assets/image/time.jpg" />
     </div>
     <div class="isLogin-message">
-      <el-button>我的主页</el-button>
+      <el-button @click="toUser">我的主页</el-button>
       <el-button>我的帖子</el-button>
     </div>
     <div class="isLogin-message">
@@ -17,6 +17,11 @@
 <script>
 export default {
   name: "is-login",
+  methods: {
+    toUser() {
+      this.$router.push("/user");
+    },
+  },
 };
 </script>
 

@@ -51,8 +51,8 @@ export default {
     write,
   },
   props: {
-    thread1: Object,
-    thread2: Object,
+    thread1: Array,
+    thread2: Array,
   },
   data() {
     return {};

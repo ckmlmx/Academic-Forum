@@ -36,10 +36,13 @@
               class="input input1"
               v-model="ruleform.yanZheng"
             ></el-input>
-            <el-button>获取验证码</el-button>
+            <el-button @click="sendMessage" v-if="setTime"
+              >获取验证码</el-button
+            >
+            <elel-button v-else>{{ time }}S</elel-button>
           </el-form-item>
           <el-form-item class="form-item">
-            <el-button round type="primary">立即注册</el-button>
+            <el-button round type="primary" @click="Login">立即注册</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -48,6 +51,7 @@
 </template>
 
 <script>
+import store from "../../store";
 export default {
   name: "zhuce",
   data() {
@@ -94,6 +98,8 @@ export default {
           { required: true, message: "请输入验证码", trigger: "blur" },
         ],
       },
+      setTime: true,
+      time: 60,
     };
   },
   methods: {
@@ -104,26 +110,24 @@ export default {
         this.ruleform.tel &&
         this.ruleform.yanZheng
       ) {
-        this.axios.post("/user/forum-user", this.ruleform).then((res) => {
-          if (res.data.status == 201) {
-            this.$message({
-              type: "success",
-              message: "注册成功",
-            });
-            this.$router.push("/denglu");
-          } else if (res.data.status == 409) {
-            this.$message({
-              type: "error",
-              message: "用户名重复",
-            });
-          }
-        });
+        store.state.isLogin = true;
+        this.$router.push("/shouYe");
       } else {
         this.$message({
           type: "error",
           message: "请完善信息",
         });
       }
+    },
+    sendMessage() {
+      this.setTime = false;
+      timer = setInterval(() => {
+        this.time = this.time - 1;
+        if (this.time == 0) {
+          this.setTime = true;
+          clearInterval(timer);
+        }
+      }, 1000);
     },
   },
 };

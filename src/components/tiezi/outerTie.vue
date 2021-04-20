@@ -61,7 +61,7 @@ export default {
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 .content {
-  width: 400px;
+  width: 230px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

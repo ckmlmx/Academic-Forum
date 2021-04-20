@@ -43,14 +43,15 @@ export default {
   methods: {
     submit() {
       if (this.text.title && this.text.textarea) {
-        this.axios.get("/0", this.text).then((res) => {
-          if (res.data.status == 200) {
-            this.$message({
-              type: "success",
-              message: "发表成功",
-            });
-          }
-        });
+        const oldThread = JSON.parse(localStorage.getItem("java")).thread1;
+        const newThread = {
+          id: oldThread.length,
+          title: this.text.title,
+          content: this.text.textarea,
+          date: new Date(),
+          author: "cc",
+        };
+        localStorage.setItem("java", JSON.stringify());
       } else {
         this.$message({
           type: "error",

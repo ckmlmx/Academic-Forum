@@ -16,7 +16,7 @@ import isLogin from "./shouye/is-login.vue";
 import swipe from "./shouye/lunbotu";
 import notLogin from "./shouye/not-login";
 import syTabbar from "./shouye/shouye-tabbar";
-
+import store from "../../store";
 export default {
   name: "shouye",
   components: {
@@ -27,11 +27,16 @@ export default {
     syTabbar,
   },
   data() {
-    return {
-      isLogin: false,
-    };
+    return {};
   },
-  mounted() {},
+  computed: {
+    isLogin() {
+      return store.state.isLogin;
+    },
+  },
+  mounted() {
+    console.log(typeof JSON.parse(localStorage.getItem("c")));
+  },
 };
 </script>
 

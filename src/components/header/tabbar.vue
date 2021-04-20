@@ -7,12 +7,7 @@
       <li><router-link to="/python">Python</router-link></li>
       <li><router-link to="/javascript">JavaScrpt</router-link></li>
     </ul>
-    <div class="profile" v-if="notLogin">
-      <p><router-link to="/denglu">登录</router-link></p>
-      <p>|</p>
-      <p><router-link to="zhuce">注册</router-link></p>
-    </div>
-    <el-menu class="logIn" mode="horizontal" v-else>
+    <el-menu class="logIn" mode="horizontal" v-if="isLogin">
       <el-submenu index="2">
         <template slot="title"
           ><img src="../../assets/image/time.jpg"
@@ -22,24 +17,37 @@
         >
         <el-menu-item index="2-2" class="menu-item">我的帖子</el-menu-item>
         <el-menu-item index="2-3" class="menu-item">我的收藏</el-menu-item>
-        <el-menu-item index="2-3" class="menu-item">退出论坛</el-menu-item>
+        <el-menu-item index="2-3" class="menu-item" @click="quict"
+          >退出论坛</el-menu-item
+        >
       </el-submenu>
     </el-menu>
+    <div class="profile" v-else>
+      <p><router-link to="/denglu">登录</router-link></p>
+      <p>|</p>
+      <p><router-link to="zhuce">注册</router-link></p>
+    </div>
   </div>
 </template>
 
 <script>
+import store from "../../store";
 export default {
   name: "tabbar",
   data() {
-    return {
-      notLogin: true,
-    };
+    return {};
   },
-  mounted() {},
+  computed: {
+    isLogin() {
+      return store.state.isLogin;
+    },
+  },
   methods: {
     toUser() {
       this.$router.push("/user");
+    },
+    quict() {
+      store.commit("toLogOut");
     },
   },
 };
