@@ -71,8 +71,16 @@ export default {
     },
     handleLogin() {
       if (this.user.userName && this.user.passWord) {
-        store.commit("toLogin");
-        this.$router.push("/shouYe");
+        const userMessage = JSON.parse(localStorage.getItem("userMessage"))[0];
+        if (
+          this.user.userName == userMessage.userName &&
+          this.user.passWord == userMessage.passWord
+        ) {
+          store.commit("toLogin");
+          this.$router.push("/shouYe");
+        } else {
+          alert("账号或密码错误");
+        }
       } else {
         alert("请输入账号密码");
       }

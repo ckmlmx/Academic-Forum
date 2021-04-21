@@ -32,26 +32,35 @@
 
 <script>
 export default {
+  props: {
+    type: String,
+  },
   data() {
     return {
       text: {
         title: "",
         textarea: "",
       },
+      ckm: "java",
     };
   },
   methods: {
     submit() {
       if (this.text.title && this.text.textarea) {
-        const oldThread = JSON.parse(localStorage.getItem("java")).thread1;
+        const thread1 = JSON.parse(localStorage.getItem("java")).thread1;
+        const date = new Date();
         const newThread = {
-          id: oldThread.length,
+          id: thread1.length + 1,
           title: this.text.title,
           content: this.text.textarea,
-          date: new Date(),
+          date: `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`,
           author: "cc",
         };
-        localStorage.setItem("java", JSON.stringify());
+        thread1.push(newThread);
+        localStorage.setItem("java", JSON.stringify({ thread1 }));
+        window.location.assign(`http://localhost:8080/${this.type}`);
+        this.text.title = "";
+        this.text.textarea = "";
       } else {
         this.$message({
           type: "error",
@@ -59,6 +68,9 @@ export default {
         });
       }
     },
+  },
+  mounted() {
+    console.log("a", this.type);
   },
 };
 </script>

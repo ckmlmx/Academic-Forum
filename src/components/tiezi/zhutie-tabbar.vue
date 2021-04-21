@@ -1,10 +1,11 @@
 <template>
   <el-tabs type="border-card" class="tabbar">
-    <el-tab-pane label="热门回复">
+    <el-tab-pane label="热门回复" style="position: relative; min-height: 400px">
       <reply></reply>
       <reply></reply>
       <reply></reply>
       <reply></reply>
+      <div style="clear: both; height: 100px"></div>
       <el-pagination
         background
         layout="prev, pager, next"
@@ -13,8 +14,12 @@
       >
       </el-pagination>
     </el-tab-pane>
-    <el-tab-pane label="最新回复">
+    <el-tab-pane label="最新回复" style="position: relative; min-height: 400px">
       <reply></reply>
+      <reply></reply>
+      <reply></reply>
+      <reply></reply>
+      <div style="clear: both; height: 100px"></div>
       <el-pagination
         background
         layout="prev, pager, next"
@@ -57,6 +62,7 @@ export default {
   overflow: hidden;
   margin-top: 30px;
   border: 1px dotted black;
+  position: relative;
 }
 .reply-tabbar {
   background-color: #f9f9f9;
@@ -95,5 +101,8 @@ export default {
 .pagination {
   margin-top: 30px;
   margin-bottom: 30px;
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
 }
 </style>

@@ -17,7 +17,7 @@
         class="pagination"
       >
       </el-pagination>
-      <write></write>
+      <write :type="this.type"></write>
     </el-tab-pane>
     <el-tab-pane label="最新帖子">
       <outerTie
@@ -36,7 +36,7 @@
         class="pagination"
       >
       </el-pagination>
-      <write></write>
+      <write :type="this.type"></write>
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -53,15 +53,13 @@ export default {
   props: {
     thread1: Array,
     thread2: Array,
+    type: String,
   },
   data() {
     return {};
   },
-  created() {
-    // this.axios.get("/thread/forum-thread-page").then((res) => {
-    //   this.thread1 = res.data.thread1;
-    //   this.thread2 = res.data.thread2;
-    // });
+  mounted() {
+    console.log("ckm", this.type);
   },
 };
 </script>

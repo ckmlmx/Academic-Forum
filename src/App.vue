@@ -24,21 +24,21 @@ export default {
             author: "喝水的鱼",
           },
           {
-            id: 3,
+            id: 2,
             title: "git解决冲突",
             content: "在工作中，我们往往是多人开发的......",
             date: "2021/1/20",
             author: "小明",
           },
           {
-            id: 4,
+            id: 3,
             title: "JAVA搭建微服务器?",
             content: "微服务 - 微服务的作用 - 微服务框架......",
             date: "2021/2/1",
             author: "白云",
           },
           {
-            id: 5,
+            id: 4,
             title: "C++的输出格式?",
             content: "一.使用控制符控制输出格式......",
             date: "2021/2/4",
@@ -46,6 +46,15 @@ export default {
           },
         ],
       })
+    );
+    localStorage.setItem(
+      "userMessage",
+      JSON.stringify([
+        {
+          userName: "ckm",
+          passWord: "123456789",
+        },
+      ])
     );
   },
 };

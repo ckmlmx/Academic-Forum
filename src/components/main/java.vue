@@ -11,7 +11,7 @@
         </div>
       </div>
       <moduleTop></moduleTop>
-      <moduleTabbar :thread1="thread1"></moduleTabbar>
+      <moduleTabbar :thread1="thread1" :type="this.type"></moduleTabbar>
     </tBody>
   </div>
 </template>
@@ -36,6 +36,7 @@ export default {
     return {
       url: require("../../assets/image/time.jpg"),
       id: "",
+      type: "java",
     };
   },
   computed: {
@@ -47,6 +48,9 @@ export default {
     to() {
       this.$router.push("/writeContainer");
     },
+  },
+  mounted() {
+    console.log(this.type);
   },
 };
 </script>
