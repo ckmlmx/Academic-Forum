@@ -14,7 +14,6 @@ Vue.use(ElementUI);
 Vue.prototype.axios = axios
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
-window.localStorage.setItem('ckm', true)
 new Vue({
   router,
   store,

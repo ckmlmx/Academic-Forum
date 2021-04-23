@@ -2,41 +2,64 @@
   <div class="reply">
     <div class="message">
       <img src="../../assets/image/bg.jpg" />
-      <p class="name">ckm</p>
-      <p class="louzhu" v-if="isLouzhu">楼主</p>
-      <p class="time">2020/20/20</p>
+      <p class="name">{{ name }}</p>
+      <!-- <p class="louzhu" v-if="isLouzhu">楼主</p> -->
+      <p class="time">{{ date }}</p>
     </div>
     <div class="content">
-      深大阿达的阿打算打大四打打啊阿萨德AAS按时打大叔大婶打大四的萨达是大叔大婶打打啊大四打
+      {{ content }}
     </div>
     <div class="interaction">
-      <i class="iconfont icon-zan">点赞(10)</i>
-      <i class="iconfont icon-zan-copy">踩(5)</i>
+      <i :class="[iconfont, isliked ? 'icon-zan2' : 'icon-zan']" @click="zan"
+        >点赞({{ liked }})</i
+      >
+      <i
+        :class="[iconfont, isunliked ? 'icon-zan1' : 'icon-zan-copy']"
+        @click="cai"
+        >踩({{ unliked }})</i
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      default: "ckm",
+    },
+    date: String,
+    content: String,
+    liked: Number,
+    unliked: Number,
+    isliked: {
+      type: Boolean,
+      default: false,
+    },
+    isunliked: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
-      isLouzhu: false,
-      name: "",
-      date: "",
-      content: "",
-      liked: 0,
-      unliked: 0,
+      iconfont: "iconfont",
     };
   },
-  created() {
-    this.axios.get("/0").then((res) => {
-      this.name = res.data.name;
-      this.date = res.data.date;
-      this.content = res.data.content;
-      this.liked = res.data.liked;
-      this.unliked = res.data.unliked;
-    });
+  methods: {
+    zan() {
+      this.isliked = true;
+      this.liked += 1;
+      this.isunliked = false;
+    },
+    cai() {
+      this.isliked = false;
+      this.unliked += 1;
+      this.isunliked = true;
+    },
   },
+  created() {},
 };
 </script>
 

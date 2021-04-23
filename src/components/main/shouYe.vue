@@ -34,9 +34,6 @@ export default {
       return store.state.isLogin;
     },
   },
-  mounted() {
-    console.log(typeof JSON.parse(localStorage.getItem("c")));
-  },
 };
 </script>
 

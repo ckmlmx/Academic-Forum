@@ -1,6 +1,6 @@
 <template>
   <div class="zhutie-title">
-    <b>这是题目</b>
+    <b>{{ title }}</b>
     <div>
       <a href="#replay" class="toreplay"
         ><el-button type="primary" icon="el-icon-edit" size="small"
@@ -29,22 +29,20 @@
 
 <script>
 export default {
+  props: {
+    isliked: {
+      type: Boolean,
+      default: false,
+    },
+    title: String,
+  },
   data() {
-    return {
-      isliked: false,
-      title: "",
-    };
+    return {};
   },
-  created() {
-    this.axios.get("/0").then((res) => {
-      this.title = res.data.title;
-    });
-  },
+  created() {},
   methods: {
     picked() {
-      this.axios.get("/0").then((res) => {
-        this.liked = res.liked;
-      });
+      this.isliked = !this.isliked;
     },
   },
 };

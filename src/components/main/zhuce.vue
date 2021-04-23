@@ -110,8 +110,16 @@ export default {
         this.ruleform.tel &&
         this.ruleform.yanZheng
       ) {
-        store.state.isLogin = true;
-        this.$router.push("/shouYe");
+        const userMessage = JSON.parse(localStorage.getItem("userMessage"));
+        const newUser = {
+          userName: this.ruleform.userName,
+          passWord: this.ruleform.passWord,
+        };
+        userMessage.push(newUser);
+        localStorage.setItem("userMessage", JSON.stringify(userMessage));
+        localStorage.setItem("isLogin", JSON.stringify(true));
+        // this.$router.push("/shouYe");
+        window.location.assign("/shouye");
       } else {
         this.$message({
           type: "error",

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" @click="toTiezi">
     <div class="floor">{{ id }}</div>
     <div class="article">
       <p class="titile">{{ title }}</p>
@@ -21,6 +21,11 @@ export default {
     author: String,
     content: String,
     date: String,
+  },
+  methods: {
+    toTiezi() {
+      this.$router.push({ path: "tiezi", query: { id: this.id } });
+    },
   },
 };
 </script>

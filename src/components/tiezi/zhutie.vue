@@ -25,6 +25,12 @@ export default {
     zhutieTabbar,
     zhutieReply,
   },
+  data() {
+    return {
+      id: this.$route.query.id,
+    };
+  },
+  created() {},
 };
 </script>
 

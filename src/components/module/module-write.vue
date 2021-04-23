@@ -47,20 +47,27 @@ export default {
   methods: {
     submit() {
       if (this.text.title && this.text.textarea) {
-        const thread1 = JSON.parse(localStorage.getItem("java")).thread1;
-        const date = new Date();
-        const newThread = {
-          id: thread1.length + 1,
-          title: this.text.title,
-          content: this.text.textarea,
-          date: `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`,
-          author: "cc",
-        };
-        thread1.push(newThread);
-        localStorage.setItem("java", JSON.stringify({ thread1 }));
-        window.location.assign(`http://localhost:8080/${this.type}`);
-        this.text.title = "";
-        this.text.textarea = "";
+        if (JSON.parse(localStorage.getItem("isLogin"))) {
+          const thread1 = JSON.parse(localStorage.getItem("java")).thread1;
+          const date = new Date();
+          const newThread = {
+            id: thread1.length + 1,
+            title: this.text.title,
+            content: this.text.textarea,
+            date: `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`,
+            author: "cc",
+          };
+          thread1.push(newThread);
+          localStorage.setItem("java", JSON.stringify({ thread1 }));
+          window.location.assign(`http://localhost:8080/${this.type}`);
+          this.text.title = "";
+          this.text.textarea = "";
+        } else {
+          this.$message({
+            type: "error",
+            message: "请登录",
+          });
+        }
       } else {
         this.$message({
           type: "error",
@@ -69,9 +76,7 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log("a", this.type);
-  },
+  mounted() {},
 };
 </script>
 

@@ -71,13 +71,18 @@ export default {
     },
     handleLogin() {
       if (this.user.userName && this.user.passWord) {
-        const userMessage = JSON.parse(localStorage.getItem("userMessage"))[0];
+        const userMessage = JSON.parse(localStorage.getItem("userMessage"));
         if (
-          this.user.userName == userMessage.userName &&
-          this.user.passWord == userMessage.passWord
+          userMessage.some((i) => {
+            return (
+              i.userName == this.user.userName &&
+              i.passWord == this.user.passWord
+            );
+          })
         ) {
-          store.commit("toLogin");
-          this.$router.push("/shouYe");
+          localStorage.setItem("isLogin", JSON.stringify(true));
+          // this.$router.push("/shouYe");
+          window.location.assign("/shouye");
         } else {
           alert("账号或密码错误");
         }

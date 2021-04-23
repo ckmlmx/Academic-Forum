@@ -2,30 +2,25 @@
   <div class="zhutie-body">
     <div class="message">
       <img src="../../assets/image/bg.jpg" />
-      <p class="name">ckm</p>
+      <p class="name">{{ name }}</p>
       <p class="louzhu">楼主</p>
-      <p class="time">2020/20/20</p>
+      <p class="time">{{ date }}</p>
     </div>
-    <div class="read">内容</div>
+    <div class="read">{{ content }}</div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    name: String,
+    date: String,
+    content: String,
+  },
   data() {
-    return {
-      name: "",
-      date: "",
-      content: "",
-    };
+    return {};
   },
-  created() {
-    this.axios.get("/0").then((res) => {
-      this.name = res.data.name;
-      this.date = res.data.date;
-      this.content = res.data.content;
-    });
-  },
+  created() {},
 };
 </script>
 
@@ -71,6 +66,5 @@ export default {
   width: 80%;
   min-height: 300px;
   margin: 20px auto;
-  background-color: greenyellow;
 }
 </style>

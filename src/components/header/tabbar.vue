@@ -47,6 +47,7 @@ export default {
       this.$router.push("/user");
     },
     quict() {
+      localStorage.setItem("isLogin", JSON.stringify(false));
       store.commit("toLogOut");
     },
   },

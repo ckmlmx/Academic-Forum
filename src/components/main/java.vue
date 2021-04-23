@@ -49,9 +49,7 @@ export default {
       this.$router.push("/writeContainer");
     },
   },
-  mounted() {
-    console.log(this.type);
-  },
+  mounted() {},
 };
 </script>
 
