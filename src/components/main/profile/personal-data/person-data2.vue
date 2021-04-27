@@ -5,7 +5,7 @@
         <b>基本信息</b>
         <div>
           <button class="edit-button" @click="$emit('changeMod')">取消</button>
-          <button @click="$emit('changeMod')">保存</button>
+          <button @click="changeMessage">保存</button>
         </div>
       </div>
       <el-divider class="el-divider"></el-divider>
@@ -25,8 +25,8 @@
     <div class="person-data-body">
       <span>我的性别</span>
       <div>
-        <button class="sex-button-1">男</button>
-        <button class="sex-button-2">女</button>
+        <button class="sex-button-1" @click="changeMan">男</button>
+        <button class="sex-button-2" @click="changeGirl">女</button>
       </div>
     </div>
     <div class="person-data-body">
@@ -76,7 +76,37 @@ export default {
       profile: "",
       place: "",
       hobby: "",
+      sex: "",
     };
+  },
+  methods: {
+    changeMan() {
+      this.sex = "男";
+    },
+    changeGirl() {
+      this.sex = "女";
+    },
+    changeMessage() {
+      const a = JSON.parse(localStorage.getItem("userMessage"));
+      a[0].userName = this.name;
+      a[0].message = {
+        sex: this.sex,
+        adress: this.place,
+        hobby: this.hobby,
+        detail: this.profile,
+      };
+
+      localStorage.setItem("userMessage", JSON.stringify(a));
+      this.$emit("changeMe", {
+        message: {
+          sex: this.sex,
+          adress: this.place,
+          hobby: this.hobby,
+          detail: this.profile,
+        },
+        name: this.name,
+      });
+    },
   },
 };
 </script>

@@ -7,6 +7,17 @@
       <li><router-link to="/python">Python</router-link></li>
       <li><router-link to="/javascript">JavaScrpt</router-link></li>
     </ul>
+    <div>
+      <el-button
+        icon="el-icon-search"
+        type="primary"
+        style="color: black"
+        @click="toSearch"
+        >搜索</el-button
+      >
+      <el-input style="width: 500px" v-model="search" />
+    </div>
+
     <el-menu class="logIn" mode="horizontal" v-if="isLogin">
       <el-submenu index="2">
         <template slot="title"
@@ -35,7 +46,9 @@ import store from "../../store";
 export default {
   name: "tabbar",
   data() {
-    return {};
+    return {
+      search: "",
+    };
   },
   computed: {
     isLogin() {
@@ -49,6 +62,9 @@ export default {
     quict() {
       localStorage.setItem("isLogin", JSON.stringify(false));
       store.commit("toLogOut");
+    },
+    toSearch() {
+      this.$router.push({ path: "search", query: { message: this.search } });
     },
   },
 };

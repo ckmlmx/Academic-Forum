@@ -12,18 +12,61 @@
       </el-input>
     </div>
     <div class="fabiao">
-      <el-button type="danger">回复</el-button>
+      <el-button type="danger" @click="send">回复</el-button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    reply: Object,
+    id: String,
+  },
   data() {
     return {
       textarea: "",
     };
   },
+  methods: {
+    send() {
+      if (this.textarea) {
+        if (JSON.parse(localStorage.getItem("isLogin"))) {
+          const thread = JSON.parse(localStorage.getItem("java"));
+          const name = JSON.parse(localStorage.getItem("userMessage"))[0]
+            .userName;
+          const date = new Date();
+          const re = {
+            name: name,
+            date: `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`,
+            content: this.textarea,
+            liked: 0,
+            unliked: 0,
+            isliked: false,
+            isunliked: false,
+          };
+          thread.thread1[this.id - 1].comment.push(re);
+          localStorage.setItem("java", JSON.stringify(thread));
+          this.$message({
+            type: "success",
+            message: "回复成功",
+          });
+          window.location.reload();
+        } else {
+          this.$message({
+            type: "error",
+            message: "请登录",
+          });
+        }
+      } else {
+        this.$message({
+          type: "error",
+          message: "请写下你要说的话",
+        });
+      }
+    },
+  },
+  created() {},
 };
 </script>
 

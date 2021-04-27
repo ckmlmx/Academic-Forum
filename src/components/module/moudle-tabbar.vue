@@ -58,9 +58,7 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    console.log("ckm", this.type);
-  },
+  mounted() {},
 };
 </script>
 

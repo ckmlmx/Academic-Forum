@@ -11,6 +11,7 @@ const zhuce = () => import('../components/main/zhuce.vue')
 const user = () => import('../components/main/profile/user.vue')
 const tiezi = () => import('../components/tiezi/zhutie.vue')
 const person = () => import('../components/main/profile/personal-data/person.vue')
+const search=()=>import('../components/main/search.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -87,7 +88,15 @@ const routes = [
     meta: {
       title: '个人资料'
     }
-  }
+  },
+  {
+    path:'/search',
+    component:search,
+    meta:{
+      title:'搜索结果'
+    }
+  },
+  
 
 ]
 

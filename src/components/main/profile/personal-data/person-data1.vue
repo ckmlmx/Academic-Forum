@@ -9,30 +9,44 @@
     </div>
     <div class="person-data-body">
       <span>我的昵称</span>
-      <span class="person-data-body-1">ckm</span>
+      <span class="person-data-body-1">{{ userName }}</span>
     </div>
     <div class="person-data-body">
       <span>我的性别</span>
-      <span class="person-data-body-1">男</span>
+      <span class="person-data-body-1">{{ sex }}</span>
     </div>
     <div class="person-data-body">
       <span>我的简介</span>
-      <span class="person-data-body-1">ck阿达大大m</span>
+      <span class="person-data-body-1">{{ detail }}</span>
     </div>
     <div class="person-data-body">
       <span>我居住地</span>
-      <span class="person-data-body-1">ckm</span>
+      <span class="person-data-body-1">{{ adress }}</span>
     </div>
     <div class="person-data-body">
       <span>兴趣爱好</span>
-      <span class="person-data-body-1">ckm</span>
+      <span class="person-data-body-1">{{ hobby }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    message: Object,
+    name: String,
+  },
+  data() {
+    return {
+      userName: this.name,
+      sex: this.message.sex,
+      detail: this.message.detail,
+      adress: this.message.adress,
+      hobby: this.message.hobby,
+    };
+  },
   methods: {},
+  created() {},
 };
 </script>
 

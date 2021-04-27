@@ -2,10 +2,22 @@
   <div>
     <tabbar></tabbar>
     <div class="zhutie-container">
-      <zhutieTitle class="zhutieTitle"></zhutieTitle>
-      <zhutieBody></zhutieBody>
-      <zhutieTabbar></zhutieTabbar>
-      <zhutieReply></zhutieReply>
+      <zhutieTitle
+        class="zhutieTitle"
+        :title="reply.title"
+        :isliked="reply.like"
+      ></zhutieTitle>
+      <zhutieBody
+        :name="reply.author"
+        :date="reply.date"
+        :content="reply.content"
+      ></zhutieBody>
+      <zhutieTabbar
+        :comment="reply.comment"
+        :reply="reply"
+        :id="id"
+      ></zhutieTabbar>
+      <zhutieReply :reply="reply" :id="id"></zhutieReply>
     </div>
   </div>
 </template>
@@ -28,9 +40,12 @@ export default {
   data() {
     return {
       id: this.$route.query.id,
+      reply: {},
     };
   },
-  created() {},
+  created() {
+    this.reply = JSON.parse(localStorage.getItem("java")).thread1[this.id - 1];
+  },
 };
 </script>
 

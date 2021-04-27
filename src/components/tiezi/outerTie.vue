@@ -37,6 +37,7 @@ export default {
   border: 0.5px dotted rgb(202, 196, 196);
   overflow: hidden;
   border-collapse: collapse;
+  cursor: pointer;
 }
 .container:hover {
   background-color: rgb(229, 236, 236);

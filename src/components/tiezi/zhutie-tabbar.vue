@@ -1,29 +1,43 @@
 <template>
   <el-tabs type="border-card" class="tabbar">
     <el-tab-pane label="热门回复" style="position: relative; min-height: 400px">
-      <reply></reply>
-      <reply></reply>
-      <reply></reply>
-      <reply></reply>
+      <reply
+        v-for="(item, index) in comment"
+        :key="index"
+        :name="item.name"
+        :date="item.date"
+        :content="item.content"
+        :liked="item.liked"
+        :unliked="item.unliked"
+        :isliked="item.isliked"
+        :isunliked="item.isunliked"
+      ></reply>
       <div style="clear: both; height: 100px"></div>
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
+        :total="pages"
         class="pagination"
       >
       </el-pagination>
     </el-tab-pane>
     <el-tab-pane label="最新回复" style="position: relative; min-height: 400px">
-      <reply></reply>
-      <reply></reply>
-      <reply></reply>
-      <reply></reply>
+      <reply
+        v-for="(item, index) in comment"
+        :key="index"
+        :name="item.name"
+        :date="item.date"
+        :content="item.content"
+        :liked="item.liked"
+        :unliked="item.unliked"
+        :isliked="item.isliked"
+        :isunliked="item.isunliked"
+      ></reply>
       <div style="clear: both; height: 100px"></div>
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
+        :total="pages"
         class="pagination"
       >
       </el-pagination>
@@ -37,18 +51,21 @@ export default {
   components: {
     reply,
   },
+  props: {
+    comment: Array,
+  },
   data() {
     return {
       thread1: [],
       thread2: [],
     };
   },
-  created() {
-    this.axios.get("/thread/forum-thread-page").then((res) => {
-      this.thread1 = res.data.thread1;
-      this.thread2 = res.data.thread2;
-    });
+  computed: {
+    pages() {
+      return this.comment.length * 10;
+    },
   },
+  created() {},
 };
 </script>
 
