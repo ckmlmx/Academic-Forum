@@ -2,7 +2,7 @@
   <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
     <el-tab-pane label="热门帖子" name="first">
       <outerTie
-        v-for="item in thread1"
+        v-for="item in thread"
         :key="item.id"
         :id="item.id"
         :title="item.title"
@@ -13,7 +13,7 @@
     </el-tab-pane>
     <el-tab-pane label="最新帖子" name="second"
       ><outerTie
-        v-for="item in thread2"
+        v-for="item in thread"
         :key="item.id"
         :id="item.id"
         :title="item.title"
@@ -41,16 +41,11 @@ export default {
     };
   },
   computed: {
-    thread1() {
-      return store.state.shouye.thread1;
+    thread() {
+      return JSON.parse(localStorage.getItem("thread"));
     },
   },
-  created() {
-    this.axios.get("/thread/forum-thread-page").then((res) => {
-      this.thread1 = res.data.thread1;
-      this.thread2 = res.data.thread2;
-    });
-  },
+  created() {},
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);

@@ -52,7 +52,8 @@ export default {
   },
   computed: {
     isLogin() {
-      return store.state.isLogin;
+      // return store.state.isLogin;
+      return JSON.parse(localStorage.getItem("isLogin"));
     },
   },
   methods: {
@@ -61,7 +62,8 @@ export default {
     },
     quict() {
       localStorage.setItem("isLogin", JSON.stringify(false));
-      store.commit("toLogOut");
+      // store.commit("toLogOut");
+      window.location.reload();
     },
     toSearch() {
       this.$router.push({ path: "search", query: { message: this.search } });

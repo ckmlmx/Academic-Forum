@@ -31,9 +31,10 @@ export default {
   },
   computed: {
     isLogin() {
-      return store.state.isLogin;
+      return JSON.parse(localStorage.getItem("isLogin"));
     },
   },
+  created() {},
 };
 </script>
 

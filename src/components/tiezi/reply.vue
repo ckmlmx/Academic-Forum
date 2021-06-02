@@ -1,5 +1,5 @@
 <template>
-  <div class="reply">
+  <div class="reply" @click="changeLike">
     <div class="message">
       <div
         v-on="{ mouseover: mouseOver, mouseout: mouseOff }"
@@ -45,14 +45,8 @@ export default {
     content: String,
     liked: Number,
     unliked: Number,
-    isliked: {
-      type: Boolean,
-      default: false,
-    },
-    isunliked: {
-      type: Boolean,
-      default: false,
-    },
+    commentID: Number,
+    id: String,
   },
   data() {
     return {
@@ -60,11 +54,20 @@ export default {
       mouseON: false,
       like: this.liked,
       unlike: this.unliked,
-      islike: this.isliked,
-      isunlike: this.isunliked,
+      islike: false,
+      isunlike: false,
     };
   },
   methods: {
+    changeLike() {
+      this.$emit("changeLike", {
+        commentID: this.commentID,
+        islike: this.islike,
+        isunlike: this.isunlike,
+        like: this.like,
+        unlike: this.unlike,
+      });
+    },
     zan() {
       if (this.islike == false && this.isunlike == false) {
         this.islike = true;
@@ -100,7 +103,20 @@ export default {
       this.mouseON = false;
     },
   },
-  created() {},
+  created() {
+    const likeComment = JSON.parse(localStorage.getItem("userMessage"))[
+      localStorage.getItem("user")
+    ].likeComment;
+    if (likeComment[this.id]) {
+      this.islike = likeComment[this.id].some((i) => i == this.commentID);
+    }
+    const unlikeComment = JSON.parse(localStorage.getItem("userMessage"))[
+      localStorage.getItem("user")
+    ].unlikeComment;
+    if (unlikeComment[this.id]) {
+      this.isunlike = unlikeComment[this.id].some((i) => i == this.commentID);
+    }
+  },
 };
 </script>
 

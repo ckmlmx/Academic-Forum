@@ -4,20 +4,17 @@
     <div class="zhutie-container">
       <zhutieTitle
         class="zhutieTitle"
-        :title="reply.title"
-        :isliked="reply.like"
+        :title="thread.title"
+        :isliked="islike"
+        v-on:changeLike="changeLike"
       ></zhutieTitle>
       <zhutieBody
-        :name="reply.author"
-        :date="reply.date"
-        :content="reply.content"
+        :name="thread.author"
+        :date="thread.date"
+        :content="thread.content"
       ></zhutieBody>
-      <zhutieTabbar
-        :comment="reply.comment"
-        :reply="reply"
-        :id="id"
-      ></zhutieTabbar>
-      <zhutieReply :reply="reply" :id="id"></zhutieReply>
+      <zhutieTabbar :comment="comment" :id="id"></zhutieTabbar>
+      <zhutieReply :thread="thread" :id="id"></zhutieReply>
     </div>
   </div>
 </template>
@@ -40,11 +37,36 @@ export default {
   data() {
     return {
       id: this.$route.query.id,
-      reply: {},
+      thread: {},
+      comment: {},
+      islike: JSON.parse(localStorage.getItem("userMessage"))[
+        localStorage.getItem("user")
+      ].likeThread.some((i) => i == this.$route.query.id),
     };
   },
+  methods: {
+    changeLike(e) {
+      const l = JSON.parse(localStorage.getItem("userMessage"));
+      if (e) {
+        if (
+          !l[localStorage.getItem("user")].likeThread.some((i) => i == this.id)
+        ) {
+          l[localStorage.getItem("user")].likeThread.push(this.id);
+        }
+        localStorage.setItem("userMessage", JSON.stringify(l));
+      } else {
+        const index = l[localStorage.getItem("user")].likeThread.indexOf(
+          this.id
+        );
+        if (index > -1) {
+          l[localStorage.getItem("user")].likeThread.splice(index, 1);
+        }
+      }
+    },
+  },
   created() {
-    this.reply = JSON.parse(localStorage.getItem("java")).thread1[this.id - 1];
+    this.thread = JSON.parse(localStorage.getItem("thread"))[this.id];
+    this.comment = JSON.parse(localStorage.getItem("comment"))[this.id];
   },
 };
 </script>

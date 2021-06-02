@@ -63,6 +63,8 @@ export default {
         ],
         passWord: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
+      isLogin: false,
+      userID: Number,
     };
   },
   methods: {
@@ -72,17 +74,20 @@ export default {
     handleLogin() {
       if (this.user.userName && this.user.passWord) {
         const userMessage = JSON.parse(localStorage.getItem("userMessage"));
-        if (
-          userMessage.some((i) => {
-            return (
-              i.userName == this.user.userName &&
-              i.passWord == this.user.passWord
-            );
-          })
-        ) {
+        userMessage.forEach((i) => {
+          if (
+            i.userName == this.user.userName &&
+            i.passWord == this.user.passWord
+          ) {
+            this.isLogin = true;
+            this.userID = i.userID;
+          }
+        });
+        if (this.isLogin) {
           localStorage.setItem("isLogin", JSON.stringify(true));
-          // this.$router.push("/shouYe");
-          window.location.assign("/shouye");
+          store.commit("toUser", this.userID);
+          this.$router.push("/shouYe");
+          // window.location.assign("/shouye");
         } else {
           alert("账号或密码错误");
         }

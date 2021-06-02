@@ -13,11 +13,11 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
+        :total="10"
         class="pagination"
       >
       </el-pagination>
-      <write :type="this.type"></write>
+      <write :type="this.type" :thread="this.thread1"></write>
     </el-tab-pane>
     <el-tab-pane label="最新帖子">
       <outerTie
@@ -36,7 +36,7 @@
         class="pagination"
       >
       </el-pagination>
-      <write :type="this.type"></write>
+      <write :type="this.type" :thread="this.thread1"></write>
     </el-tab-pane>
   </el-tabs>
 </template>

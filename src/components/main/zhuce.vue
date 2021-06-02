@@ -112,14 +112,22 @@ export default {
       ) {
         const userMessage = JSON.parse(localStorage.getItem("userMessage"));
         const newUser = {
+          userID: userMessage.length,
+          phone: this.ruleform.tel,
+          message: { sex: "男", detail: "", adress: "", hobby: "" },
           userName: this.ruleform.userName,
           passWord: this.ruleform.passWord,
+          likeThread: [],
+          likeComment: [],
+          unlikeComment: [],
+          userMessage: [],
         };
         userMessage.push(newUser);
         localStorage.setItem("userMessage", JSON.stringify(userMessage));
         localStorage.setItem("isLogin", JSON.stringify(true));
-        // this.$router.push("/shouYe");
-        window.location.assign("/shouye");
+        localStorage.setItem("user", userMessage.length - 1);
+        this.$router.push("/shouYe");
+        // window.location.assign("/shouye");
       } else {
         this.$message({
           type: "error",

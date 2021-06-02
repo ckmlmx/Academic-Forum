@@ -9,8 +9,9 @@
         :content="item.content"
         :liked="item.liked"
         :unliked="item.unliked"
-        :isliked="item.isliked"
-        :isunliked="item.isunliked"
+        :id="id"
+        :commentID="index"
+        @changeLike="changeLike"
       ></reply>
       <div style="clear: both; height: 100px"></div>
       <el-pagination
@@ -53,11 +54,19 @@ export default {
   },
   props: {
     comment: Array,
+    id: String,
   },
   data() {
     return {
       thread1: [],
       thread2: [],
+      like: JSON.parse(localStorage.getItem("userMessage"))[
+        localStorage.getItem("user")
+      ].likeComment[this.id],
+      unlike: JSON.parse(localStorage.getItem("userMessage"))[
+        localStorage.getItem("user")
+      ].unlikeComment[this.id],
+      commentArr: this.comment,
     };
   },
   computed: {
@@ -65,7 +74,39 @@ export default {
       return this.comment.length * 10;
     },
   },
+
+  methods: {
+    changeLike(e) {
+      this.commentArr[e.commentID].liked = e.like;
+      this.commentArr[e.commentID].unliked = e.unlike;
+
+      if (e.islike && this.like.indexOf(e.commentID) == -1) {
+        this.like.push(e.commentID);
+      }
+      if (!e.islike && this.like.indexOf(e.commentID) > -1) {
+        this.like.splice(this.like.indexOf(e.commentID), 1);
+      }
+      if (e.isunlike && this.unlike.indexOf(e.commentID) == -1) {
+        this.unlike.push(e.commentID);
+      }
+      if (!e.isunlike && this.unlike.indexOf(e.commentID) > -1) {
+        this.unlike.splice(this.unlike.indexOf(e.commentID), 1);
+      }
+    },
+  },
   created() {},
+  beforeDestroy() {
+    const userMessage = JSON.parse(localStorage.getItem("userMessage"));
+    userMessage[localStorage.getItem("user")].likeComment[this.id] = this.like;
+    userMessage[localStorage.getItem("user")].unlikeComment[
+      this.id
+    ] = this.unlike;
+    localStorage.setItem("userMessage", JSON.stringify(userMessage));
+
+    const comment = JSON.parse(localStorage.getItem("comment"));
+    comment[this.id] = this.commentArr;
+    localStorage.setItem("comment", JSON.stringify(comment));
+  },
 };
 </script>
 

@@ -11,7 +11,7 @@
         type="primary"
         icon="el-icon-star-on"
         size="small"
-        v-if="isliked"
+        v-if="islike"
         @click="picked"
         >收藏</el-button
       >
@@ -37,12 +37,15 @@ export default {
     title: String,
   },
   data() {
-    return {};
+    return {
+      islike: this.isliked,
+    };
   },
   created() {},
   methods: {
     picked() {
-      this.isliked = !this.isliked;
+      this.islike = !this.islike;
+      this.$emit("changeLike", this.islike);
     },
   },
 };

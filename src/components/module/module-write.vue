@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import store from "../../store/index";
 export default {
   props: {
     type: String,
@@ -48,17 +49,26 @@ export default {
     submit() {
       if (this.text.title && this.text.textarea) {
         if (JSON.parse(localStorage.getItem("isLogin"))) {
-          const thread1 = JSON.parse(localStorage.getItem("java")).thread1;
+          const thread1 = JSON.parse(localStorage.getItem("thread"));
           const date = new Date();
           const newThread = {
-            id: thread1.length + 1,
+            id: thread1.length,
             title: this.text.title,
             content: this.text.textarea,
             date: `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`,
-            author: "cc",
+            author: JSON.parse(localStorage.getItem("userMessage"))[
+              localStorage.getItem("user")
+            ].userName,
+            class: this.type,
           };
           thread1.push(newThread);
-          localStorage.setItem("java", JSON.stringify({ thread1 }));
+          const user = JSON.parse(localStorage.getItem("userMessage"));
+          const loginUser = user[localStorage.getItem("user")];
+          if (loginUser.editThread.indexOf(thread1.length) == -1) {
+            loginUser.editThread.push(thread1.length);
+            localStorage.setItem("userMessage", JSON.stringify(user));
+          }
+          localStorage.setItem("thread", JSON.stringify(thread1));
           window.location.assign(`http://localhost:8080/${this.type}`);
           this.text.title = "";
           this.text.textarea = "";

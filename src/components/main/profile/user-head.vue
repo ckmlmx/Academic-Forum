@@ -9,7 +9,7 @@
           <span>ckm</span>
         </i>
       </div>
-      <i class="el-icon-star-off">个人简介:</i>
+      <i class="el-icon-star-off">个人简介:爱冲浪的鱼</i>
     </div>
   </div>
 </template>

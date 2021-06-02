@@ -20,7 +20,7 @@
 <script>
 export default {
   props: {
-    reply: Object,
+    thread: Object,
     id: String,
   },
   data() {
@@ -32,9 +32,10 @@ export default {
     send() {
       if (this.textarea) {
         if (JSON.parse(localStorage.getItem("isLogin"))) {
-          const thread = JSON.parse(localStorage.getItem("java"));
-          const name = JSON.parse(localStorage.getItem("userMessage"))[0]
-            .userName;
+          const comment = JSON.parse(localStorage.getItem("comment"));
+          const user = JSON.parse(localStorage.getItem("userMessage"));
+          const loginUser = user[localStorage.getItem("user")];
+          const name = loginUser.userName;
           const date = new Date();
           const re = {
             name: name,
@@ -42,15 +43,17 @@ export default {
             content: this.textarea,
             liked: 0,
             unliked: 0,
-            isliked: false,
-            isunliked: false,
           };
-          thread.thread1[this.id - 1].comment.push(re);
-          localStorage.setItem("java", JSON.stringify(thread));
+          comment[this.id].push(re);
+          localStorage.setItem("comment", JSON.stringify(comment));
           this.$message({
             type: "success",
             message: "回复成功",
           });
+          if (loginUser.replyThread.indexOf(this.id) == -1) {
+            loginUser.replyThread.push(Number(this.id));
+            localStorage.setItem("userMessage", JSON.stringify(user));
+          }
           window.location.reload();
         } else {
           this.$message({

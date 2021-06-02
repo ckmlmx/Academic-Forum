@@ -11,7 +11,7 @@
         </div>
       </div>
       <moduleTop></moduleTop>
-      <moduleTabbar :thread1="thread1" :type="this.type"></moduleTabbar>
+      <moduleTabbar :thread1="java" :type="this.type"></moduleTabbar>
     </tBody>
   </div>
 </template>
@@ -37,11 +37,16 @@ export default {
       url: require("../../assets/image/time.jpg"),
       id: "",
       type: "java",
+      java: JSON.parse(localStorage.getItem("thread")).filter((i) => {
+        return i.class == "java";
+      }),
     };
   },
   computed: {
-    thread1() {
-      return JSON.parse(localStorage.getItem("java")).thread1;
+    thread() {
+      return JSON.parse(localStorage.getItem("thread")).filter((i) => {
+        return i.class == "java";
+      });
     },
   },
   methods: {
